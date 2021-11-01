@@ -9,3 +9,9 @@ local function randomString(length)
     math.randomseed(os.clock()^5)
     return randomString(length - 1) .. charset[math.random(1, #charset)]
 end
+
+return function(length)
+    if not length or length <= 0 then return '' end
+    math.randomseed(os.clock()^5)
+    return randomString(length - 1) .. charset[math.random(1, #charset)]
+end
