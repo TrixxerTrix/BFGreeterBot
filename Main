@@ -35,7 +35,7 @@ wait()
 plrs.LocalPlayer.Character.HumanoidRootPart.Anchored = true
 for i, v in next, tolog do
     if plrs:WaitForChild(plrs:GetNameFromUserIdAsync(tonumber(v)),1) then
-	gotocframe(workspace:WaitForChild(plrs:GetNameFromUserIdAsync(tonumber(v)),1):WaitForChild("HumanoidRootPart",5))
+	gotocframe(workspace:WaitForChild(plrs:GetNameFromUserIdAsync(tonumber(v)),1):WaitForChild("HumanoidRootPart",5).CFrame)
         logplruuii(plr.Name,true)
         wait(5)
     end
