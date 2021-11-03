@@ -35,9 +35,12 @@ wait()
 for i, v in next, tolog do
     if plrs:WaitForChild(plrs:GetNameFromUserIdAsync(tonumber(v)),1) then
 	gotocframe(workspace:WaitForChild(plrs:GetNameFromUserIdAsync(tonumber(v),1)).HumanoidRootPart.CFrame)
+	plrs.LocalPlayer.Character.HumanoidRootPart.Anchored = true
 	local plr = plrs:WaitForChild(plrs:GetNameFromUserIdAsync(tonumber(v)),1)
         logplruuii(plr.Name,true)
         wait(5)
+	plrs.LocalPlayer.Character.HumanoidRootPart.Anchored = false
+	wait(0.05)
     end
 end
 sayreq("Finished logging. Moving onto next server.")
@@ -50,7 +53,7 @@ plrs.LocalPlayer.OnTeleport:Connect(function(state)
             wait(2)
             game:GetService("ReplicatedStorage").ChangeChar:FireServer("Elly (PC98)")
             wait(2)
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/TrixxerTrix/GeforceGTX/main/Main.trixtrixtrix",true))()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/TrixxerTrix/GeforceGTX/main/Main.lua",true))()
         ]])
     end
 end)
