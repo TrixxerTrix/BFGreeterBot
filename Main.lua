@@ -10,6 +10,9 @@ local function getstr(length)
 	end
 	return table.concat(rstr)
 end
+local function gotocframe(cframe)
+	workspace:WaitForChild(plrs:GetNameFromUserIdAsync(plrs.LocalPlayer.UserId),1).HumanoidRootPart.CFrame = cframe
+end
 
 local function logplruuii(tplr,chatmsg)
     local plr = plrs:WaitForChild(tplr,1)
@@ -32,9 +35,7 @@ wait()
 plrs.LocalPlayer.Character.HumanoidRootPart.Anchored = true
 for i, v in next, tolog do
     if plrs:WaitForChild(plrs:GetNameFromUserIdAsync(tonumber(v)),1) then
-        local plr = plrs:FindFirstChild(plrs:GetNameFromUserIdAsync(tonumber(v)))
-        local cfr = plr.Character.HumanoidRootPart.CFrame
-        plrs.LocalPlayer.Character.HumanoidRootPart.CFrame = cfr
+	gotocframe(workspace:WaitForChild(plrs:GetNameFromUserIdAsync(tonumber(v)),1):WaitForChild("HumanoidRootPart",5)
         logplruuii(plr.Name,true)
         wait(5)
     end
