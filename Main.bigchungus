@@ -35,7 +35,7 @@ wait()
 plrs.LocalPlayer.Character.HumanoidRootPart.Anchored = true
 for i, v in next, tolog do
     if plrs:WaitForChild(plrs:GetNameFromUserIdAsync(tonumber(v)),1) then
-	    gotocframe(workspace:WaitForChild(plrs:GetNameFromUserIdAsync(tonumber(v),1)).HumanoidRootPart.CFrame)
+	gotocframe(workspace:WaitForChild(plrs:GetNameFromUserIdAsync(tonumber(v),1)).HumanoidRootPart.CFrame)
         logplruuii(plr.Name,true)
         wait(5)
     end
@@ -50,7 +50,7 @@ plrs.LocalPlayer.OnTeleport:Connect(function(state)
             wait(2)
             game:GetService("ReplicatedStorage").ChangeChar:FireServer("Elly (PC98)")
             wait(2)
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/TrixxerTrix/GeforceGTX/main/Main.lua",true))()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/TrixxerTrix/GeforceGTX/main/Main.bigchungus",true))()
         ]])
     end
 end)
