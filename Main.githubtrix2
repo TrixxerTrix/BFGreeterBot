@@ -38,7 +38,7 @@ for i, v in next, tolog do
 	if plr.CurrentLocation.Value == "None" or nil then
 		gotocframe(workspace:WaitForChild(plrs:GetNameFromUserIdAsync(tonumber(v),1)).HumanoidRootPart.CFrame)
 		task.spawn(function()
-			delay(0.05,function()
+			delay(0.12,function()
 				plrs.LocalPlayer.Character.HumanoidRootPart.Anchored = true
 			end)
 		end)
