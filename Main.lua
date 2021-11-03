@@ -49,18 +49,20 @@ plrs.LocalPlayer.OnTeleport:Connect(function(state)
             wait(2)
             game:GetService("ReplicatedStorage").ChangeChar:FireServer("Elly (PC98)")
             wait(2)
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/TrixxerTrix/GeforceGTX/main/Main",true))
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/TrixxerTrix/GeforceGTX/main/Main.lua",true))
         ]])
     end
 end)
 plrs.LocalPlayer.Character.HumanoidRootPart.Anchored = false
 wait(10)
-local servers,teleport = {},game:GetService("TeleportService")
-for i, v in next, game:GetService("HttpService"):JSONDecode(game:HttpGet(string.format("https://games.roblox.com/v1/games/%s/servers/Public?sortOrder=Asc&limit=100")).data) do
-    if typeof(v) == "table" and v.id ~= game.JobId then
-        servers[#servers+1] = v.id
-    end
-end
-if #servers >= 1 then
-    teleport:TeleportToPlaceInstance(game.PlaceId, servers[math.random(1, #servers)])
-else sayreq("oops we couldnt find a server, rejoining server lol");wait(5);teleport:TeleportToPlaceInstance(game.PlaceId,game.JobId) end
+local x = {}
+	for _, v in ipairs(game:GetService("HttpService"):JSONDecode(game:HttpGetAsync("https://games.roblox.com/v1/games/" .. game.PlaceId .. "/servers/Public?sortOrder=Asc&limit=100")).data) do
+		if type(v) == "table" and v.id ~= game.JobId then
+			x[#x + 1] = v.id
+		end
+	end
+	if #x > 0 then
+		game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, x[math.random(1, #x)])
+	else
+		sayreq("oops we couldnt find a server")
+	end
