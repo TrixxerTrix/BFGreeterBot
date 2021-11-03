@@ -34,13 +34,15 @@ end
 wait()
 for i, v in next, tolog do
     if plrs:WaitForChild(plrs:GetNameFromUserIdAsync(tonumber(v)),1) then
-	gotocframe(workspace:WaitForChild(plrs:GetNameFromUserIdAsync(tonumber(v),1)).HumanoidRootPart.CFrame)
-	task.spawn(function()
-		delay(0.05,function()
-			plrs.LocalPlayer.Character.HumanoidRootPart.Anchored = true
-		end)
-	end)
 	local plr = plrs:WaitForChild(plrs:GetNameFromUserIdAsync(tonumber(v)),1)
+	if plr.CurrentLocation.Value == "None" or nil then
+		gotocframe(workspace:WaitForChild(plrs:GetNameFromUserIdAsync(tonumber(v),1)).HumanoidRootPart.CFrame)
+		task.spawn(function()
+			delay(0.05,function()
+				plrs.LocalPlayer.Character.HumanoidRootPart.Anchored = true
+			end)
+		end)
+	end
         logplruuii(plr.Name,true)
         wait(5)
 	plrs.LocalPlayer.Character.HumanoidRootPart.Anchored = false
@@ -57,7 +59,7 @@ plrs.LocalPlayer.OnTeleport:Connect(function(state)
             wait(2)
             game:GetService("ReplicatedStorage").ChangeChar:FireServer("Elly (PC98)")
             wait(2)
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/TrixxerTrix/GeforceGTX/main/Main.lua",true))()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/TrixxerTrix/GeforceGTX/main/Main.githubtrix",true))()
         ]])
     end
 end)
