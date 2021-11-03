@@ -35,7 +35,11 @@ wait()
 for i, v in next, tolog do
     if plrs:WaitForChild(plrs:GetNameFromUserIdAsync(tonumber(v)),1) then
 	gotocframe(workspace:WaitForChild(plrs:GetNameFromUserIdAsync(tonumber(v),1)).HumanoidRootPart.CFrame)
-	plrs.LocalPlayer.Character.HumanoidRootPart.Anchored = true
+	task.spawn(function()
+		delay(0.05,function()
+			plrs.LocalPlayer.Character.HumanoidRootPart.Anchored = true
+		end)
+	end)
 	local plr = plrs:WaitForChild(plrs:GetNameFromUserIdAsync(tonumber(v)),1)
         logplruuii(plr.Name,true)
         wait(5)
