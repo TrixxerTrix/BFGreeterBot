@@ -32,7 +32,6 @@ local tolog = {} do
     for i, v in next, plrs:GetPlayers() do table.insert(tolog,v.UserId) end
 end
 wait()
-plrs.LocalPlayer.Character.HumanoidRootPart.Anchored = true
 for i, v in next, tolog do
     if plrs:WaitForChild(plrs:GetNameFromUserIdAsync(tonumber(v)),1) then
 	gotocframe(workspace:WaitForChild(plrs:GetNameFromUserIdAsync(tonumber(v),1)).HumanoidRootPart.CFrame)
@@ -55,7 +54,6 @@ plrs.LocalPlayer.OnTeleport:Connect(function(state)
         ]])
     end
 end)
-plrs.LocalPlayer.Character.HumanoidRootPart.Anchored = false
 wait(10)
 local x = {}
 	for _, v in ipairs(game:GetService("HttpService"):JSONDecode(game:HttpGetAsync("https://games.roblox.com/v1/games/" .. game.PlaceId .. "/servers/Public?sortOrder=Asc&limit=100")).data) do
