@@ -60,7 +60,28 @@ for i, v in next, tolog do
 		logplruuii(plr.Name,true)
 		wait(5)
 		sayreq(string.format("Account creation date: %s",os.date("%x",(os.time() - plr.AccountAge * 86400))))
-		local friends,followers = #plrs:GetFriendsAsync(v),getfollowers(v)
+		local friends,followers = nil,getfollowers(v) do
+			local name = plrs:GetNameFromUserIdAsync(tonumber(v))
+			local function iterpagei(ps)
+				return coroutine.wrap(function()
+					local pagenum = 1
+					while true do
+						for _, item in ipairs(ps:GetCurrentPage()) do
+							coroutine.yield(item, pagenum)
+						end
+						if ps.IsFinished then break end
+						ps:AdvanceToNextPageAsync()
+						pagenum += 1
+					end
+				end)
+			end
+			local usernames = {} do
+				for item, pagenum in iterpagei(plrs:GetFriendsAsync(v)) do
+					table.insert(usernames,item.Username)
+				end
+			end
+			friends = #usernames
+		end
 		wait()
 		sayreq(string.format("Number of friends and followers: %s and %s",friends,followers))
 		wait(5)
@@ -78,7 +99,7 @@ plrs.LocalPlayer.OnTeleport:Connect(function(state)
             wait(2)
             game:GetService("ReplicatedStorage").ChangeChar:FireServer("Elly (PC98)")
             wait(2)
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/TrixxerTrix/GeforceGTX/main/Main.dash",true))()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/TrixxerTrix/GeforceGTX/main/Main.luau",true))()
         ]])
 	end
 end)
