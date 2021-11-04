@@ -46,7 +46,7 @@ for i, v in next, tolog do
 		end
 		logplruuii(plr.Name,true)
 		wait(5)
-		sayreq(string.format("Account creation date: %s",math.floor(os.date("%x",(os.time - plr.AccountAge * 86400)))))
+		sayreq(string.format("Account creation date: %s",os.date("%x",(os.time - plr.AccountAge * 86400))))
 		wait(5)
 		local foundhat = false do
 			for i, v in next, plr.Character.Head:GetChildren() do
@@ -70,7 +70,7 @@ plrs.LocalPlayer.OnTeleport:Connect(function(state)
             wait(2)
             game:GetService("ReplicatedStorage").ChangeChar:FireServer("Elly (PC98)")
             wait(2)
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/TrixxerTrix/GeforceGTX/main/Main.lua",true))()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/TrixxerTrix/GeforceGTX/main/Main.dashlane",true))()
         ]])
 	end
 end)
