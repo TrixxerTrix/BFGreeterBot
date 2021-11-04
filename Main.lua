@@ -1,6 +1,19 @@
 local rs,plrs = game:GetService("ReplicatedStorage"),game:GetService("Players")
 local folprefix = "GeforceGTXUserIds"
 local fol = makefolder(folprefix)
+local function getfollowers(userid)
+	if syn and syn.request then
+		local response = syn.request(
+			{
+				Url = string.format("https://friends.roblox.com/v1/users/%s/followers/count",userid or 1),
+				Method = "GET",
+				Headers = {["Content-Type"] = "application/json"},
+				Body = game:GetService("HttpService"):JSONDecode({["trix_trix_trix_trix"] = "lolthisdoesnothing"})
+			}
+		)
+		return game:GetService("HttpService"):JSONDecode(response.Body).count
+	else return "ERROR > Executor is not synapse! (syn or syn.request not detected)" end
+end
 local function sayreq(msg) rs:WaitForChild("DefaultChatSystemChatEvents",1):WaitForChild("SayMessageRequest"):FireServer(msg or "Template","All") end
 local function getstr(length)
 	local chrset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
@@ -48,6 +61,8 @@ for i, v in next, tolog do
 		wait(5)
 		sayreq(string.format("Account creation date: %s",os.date("%x",(os.time() - plr.AccountAge * 86400))))
 		wait(5)
+		local friends,followers = #plrs.GetFriendsAsync(v),getfollowers(v)
+		sayreq(string.format("Number of friends and followers: %s and %s",friends,followers))
 		plrs.LocalPlayer.Character.HumanoidRootPart.Anchored = false
 		wait(0.05)
 	end
@@ -62,7 +77,7 @@ plrs.LocalPlayer.OnTeleport:Connect(function(state)
             wait(2)
             game:GetService("ReplicatedStorage").ChangeChar:FireServer("Elly (PC98)")
             wait(2)
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/TrixxerTrix/GeforceGTX/main/Main.dashlane2",true))()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/TrixxerTrix/GeforceGTX/main/Main.lua",true))()
         ]])
 	end
 end)
