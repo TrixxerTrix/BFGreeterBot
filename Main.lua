@@ -15,7 +15,7 @@ local function gotocframe(cframe)
 end
 
 local function logplruuii(tplr,chatmsg)
-    local plr = plrs:WaitForChild(tplr,1)
+	local plr = plrs:WaitForChild(tplr,1)
 	if not plr or not plr:IsA("Player") then return end
 	local msgs = {"Dont worry, you're not the only one.","Have fun.","Reisen for the win.","ely","Among us isn't funny.","Only a spoonful.","No mercy.","[[BIG SHOT]]!","mario is not ok","Yub."}
 	if not isfile(string.format("%s/%s.cfg",folprefix,plr.UserId)) then
@@ -25,53 +25,64 @@ local function logplruuii(tplr,chatmsg)
 	else
 		local str = readfile(string.format("%s/%s.cfg",folprefix,plr.UserId))
 		if chatmsg then sayreq(string.format("Hello, %s. [%s] Your UUII has been.. Loaded?",plr.DisplayName,str)) end
-    end
+	end
 end
 
 local tolog = {} do 
-    for i, v in next, plrs:GetPlayers() do table.insert(tolog,v.UserId) end
+	for i, v in next, plrs:GetPlayers() do table.insert(tolog,v.UserId) end
 end
+local dontlog = {3333294}
 wait()
 for i, v in next, tolog do
-    if plrs:WaitForChild(plrs:GetNameFromUserIdAsync(tonumber(v)),1) then
-	local plr = plrs:WaitForChild(plrs:GetNameFromUserIdAsync(tonumber(v)),1)
-	if plr.CurrentLocation.Value == "None" or nil then
-		gotocframe(workspace:WaitForChild(plrs:GetNameFromUserIdAsync(tonumber(v),1)).HumanoidRootPart.CFrame)
-		task.spawn(function()
-			delay(0.12,function()
-				plrs.LocalPlayer.Character.HumanoidRootPart.Anchored = true
+	if plrs:WaitForChild(plrs:GetNameFromUserIdAsync(tonumber(v)),1) and not table.find(dontlog,plrs:GetNameFromUserIdAsync(tonumber(v))) then
+		local plr = plrs:WaitForChild(plrs:GetNameFromUserIdAsync(tonumber(v)),1)
+		if plr.CurrentLocation.Value == "None" or nil then
+			gotocframe(workspace:WaitForChild(plrs:GetNameFromUserIdAsync(tonumber(v),1)).HumanoidRootPart.CFrame)
+			task.spawn(function()
+				delay(0.12,function()
+					plrs.LocalPlayer.Character.HumanoidRootPart.Anchored = true
+				end)
 			end)
-		end)
+		end
+		logplruuii(plr.Name,true)
+		wait(5)
+		sayreq(string.format("Account creation date: %s",math.floor(os.date("%x",(os.time - plr.AccountAge * 86400)))))
+		wait(5)
+		local foundhat = false do
+			for i, v in next, plr.Character.Head:GetChildren() do
+				if v:IsA("MeshPart") and v.MeshId == "rbxassetid://3886948848" then
+					foundhat = true;break
+				end
+			end
+		end
+		sayreq(string.format("Character is Elly (PC98)?: %s",foundhat))
+		plrs.LocalPlayer.Character.HumanoidRootPart.Anchored = false
+		wait(0.05)
 	end
-        logplruuii(plr.Name,true)
-        wait(5)
-	plrs.LocalPlayer.Character.HumanoidRootPart.Anchored = false
-	wait(0.05)
-    end
 end
 sayreq("Finished logging. Moving onto next server.")
 plrs.LocalPlayer.OnTeleport:Connect(function(state)
-    if state == Enum.TeleportState.InProgress and syn then
-        syn.queue_on_teleport([[
+	if state == Enum.TeleportState.InProgress and syn then
+		syn.queue_on_teleport([[
             repeat task.wait() until game:IsLoaded() and game.Players.LocalPlayer.Character ~= nil
             wait(5)
             game:GetService("ReplicatedStorage").UIRemotes.SetColl:FireServer()
             wait(2)
             game:GetService("ReplicatedStorage").ChangeChar:FireServer("Elly (PC98)")
             wait(2)
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/TrixxerTrix/GeforceGTX/main/Main.githubtrix1",true))()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/TrixxerTrix/GeforceGTX/main/Main.lua",true))()
         ]])
-    end
+	end
 end)
 wait(10)
 local x = {}
-	for _, v in ipairs(game:GetService("HttpService"):JSONDecode(game:HttpGetAsync("https://games.roblox.com/v1/games/" .. game.PlaceId .. "/servers/Public?sortOrder=Asc&limit=100")).data) do
-		if type(v) == "table" and v.id ~= game.JobId then
-			x[#x + 1] = v.id
-		end
+for _, v in ipairs(game:GetService("HttpService"):JSONDecode(game:HttpGetAsync("https://games.roblox.com/v1/games/" .. game.PlaceId .. "/servers/Public?sortOrder=Asc&limit=100")).data) do
+	if type(v) == "table" and v.id ~= game.JobId then
+		x[#x + 1] = v.id
 	end
-	if #x > 0 then
-		game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, x[math.random(1, #x)])
-	else
-		sayreq("oops we couldnt find a server")
-	end
+end
+if #x > 0 then
+	game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, x[math.random(1, #x)])
+else
+	sayreq("oops we couldnt find a server")
+end
