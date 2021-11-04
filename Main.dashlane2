@@ -48,14 +48,6 @@ for i, v in next, tolog do
 		wait(5)
 		sayreq(string.format("Account creation date: %s",os.date("%x",(os.time() - plr.AccountAge * 86400))))
 		wait(5)
-		local foundhat = false do
-			for i, v in next, plr.Character.Head:GetChildren() do
-				if v:IsA("MeshPart") and v.MeshId == "rbxassetid://3886948848" then
-					foundhat = true;break
-				end
-			end
-		end
-		sayreq(string.format("Character is Elly (PC98)?: %s",foundhat))
 		plrs.LocalPlayer.Character.HumanoidRootPart.Anchored = false
 		wait(0.05)
 	end
@@ -70,7 +62,7 @@ plrs.LocalPlayer.OnTeleport:Connect(function(state)
             wait(2)
             game:GetService("ReplicatedStorage").ChangeChar:FireServer("Elly (PC98)")
             wait(2)
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/TrixxerTrix/GeforceGTX/main/Main.dashlane1",true))()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/TrixxerTrix/GeforceGTX/main/Main.dashlane2",true))()
         ]])
 	end
 end)
