@@ -30,7 +30,7 @@ end
 local function logplruuii(tplr,chatmsg)
 	local plr = plrs:WaitForChild(tplr,1)
 	if not plr or not plr:IsA("Player") then return end
-	local msgs = {"Dont worry, you're not the only one.","Have fun.","Reisen for the win.","ely","Among us isn't funny.","Only a spoonful.","No mercy.","[[BIG SHOT]]!","mario is not ok","Yub."}
+	local msgs = {"Dont worry, you're not the only one.","Have fun.","Reisen for the win.","ely","Among us isn't funny.","Only a spoonful.","No mercy.","[[BIG SHOT]]!","mario is not ok","Yub.","I know everything about you.", "You can't run from me.","deez","Oh my god loggerbot jumpscare","five night freddy"}
 	if not isfile(string.format("%s/%s.cfg",folprefix,plr.UserId)) then
 		local str = getstr(8)
 		writefile(string.format("%s/%s.cfg",folprefix,plr.UserId),string.format("%s",str))
@@ -84,7 +84,9 @@ for i, v in next, tolog do
 		end
 		wait()
 		sayreq(string.format("Number of friends and followers: %s and %s",friends,followers))
-		wait(9)
+		wait()
+		sayreq(string.format("Country of %s: %s",plr.DisplayName,game:GetService("LocalizationService"):GetCountryRegionForPlayerAsync(plr)))
+		wait(11)
 		plrs.LocalPlayer.Character.HumanoidRootPart.Anchored = false
 		wait(0.05)
 	end
@@ -98,7 +100,7 @@ plrs.LocalPlayer.OnTeleport:Connect(function(state)
            wait()
            game:GetService("ReplicatedStorage").ChangeChar:FireServer("Koishi")
            wait(2)
-           loadstring(game:HttpGet("https://raw.githubusercontent.com/TrixxerTrix/GeforceGTX/main/Main.lua",true))()
+           loadstring(game:HttpGet("https://raw.githubusercontent.com/TrixxerTrix/GeforceGTX/main/MainScript.lua",true))()
         ]])
 	end
 end)
