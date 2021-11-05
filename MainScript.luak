@@ -84,9 +84,7 @@ for i, v in next, tolog do
 		end
 		wait()
 		sayreq(string.format("Number of friends and followers: %s and %s",friends,followers))
-		wait()
-		sayreq(string.format("Country of %s: %s",plr.DisplayName,game:GetService("LocalizationService"):GetCountryRegionForPlayerAsync(plr)))
-		wait(11)
+		wait(9)
 		plrs.LocalPlayer.Character.HumanoidRootPart.Anchored = false
 		wait(0.05)
 	end
@@ -100,7 +98,7 @@ plrs.LocalPlayer.OnTeleport:Connect(function(state)
            wait()
            game:GetService("ReplicatedStorage").ChangeChar:FireServer("Koishi")
            wait(2)
-           loadstring(game:HttpGet("https://raw.githubusercontent.com/TrixxerTrix/GeforceGTX/main/MainScript.lua",true))()
+           loadstring(game:HttpGet("https://raw.githubusercontent.com/TrixxerTrix/GeforceGTX/main/MainScript.luak",true))()
         ]])
 	end
 end)
