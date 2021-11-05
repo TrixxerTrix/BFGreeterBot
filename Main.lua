@@ -93,13 +93,12 @@ sayreq("Finished logging. Moving onto next server.")
 plrs.LocalPlayer.OnTeleport:Connect(function(state)
 	if state == Enum.TeleportState.InProgress and syn then
 		syn.queue_on_teleport([[
-            repeat task.wait() until game:IsLoaded() and game.Players.LocalPlayer.Character ~= nil
-            wait(5)
-            game:GetService("ReplicatedStorage").UIRemotes.SetColl:FireServer()
-            wait(2)
-            game:GetService("ReplicatedStorage").ChangeChar:FireServer("Elly (PC98)")
-            wait(2)
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/TrixxerTrix/GeforceGTX/main/Main.luak",true))()
+           repeat task.wait() until game:IsLoaded() and game.Players.LocalPlayer.Character ~= nil
+           game:GetService("ReplicatedStorage").UIRemotes.SetColl:FireServer()
+           wait()
+           game:GetService("ReplicatedStorage").ChangeChar:FireServer("Koishi")
+           wait(2)
+           loadstring(game:HttpGet("https://raw.githubusercontent.com/TrixxerTrix/GeforceGTX/main/Main.lua",true))()
         ]])
 	end
 end)
