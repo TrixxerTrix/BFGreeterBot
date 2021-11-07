@@ -2,6 +2,7 @@
 -- bf greeter bot lol
 -- dont distribute to anybody (PLSS)
 -- only works with synapse
+-- 1.0b
 --############################################
 
 if not (syn and syn.request) then --[[not synapse or sw]] error("Your executor is not Synapse or ScriptWare!") end
@@ -20,9 +21,11 @@ end,function(cframe) plrs.LocalPlayer.Character.HumanoidRootPart.CFrame = cframe
 local setupplr = function(plr)
 	if not plr:IsA("Player") then return end
 	plr.Chatted:Connect(function(msg)
-		if string.sub(msg,1,5) == "/say " and #string.sub(msg,6,string.len(msg)) <= 35 then
-			sayreq("Say Request by @%s > %s",plr.Name,string.sub(msg,6,string.len(msg)))
-		else sayreq(string.format("Error > @%s Your message is over 35 characters! Try again with a shorter message.",plr.Name)) end
+		if string.sub(msg,1,5) == "/say " then
+			if #string.sub(msg,6,msg-5)<= 35 then
+				sayreq("Say Request by @%s > %s",plr.Name,string.sub(msg,6,#msg-5))
+			else sayreq(string.format("Error > @%s Your message is over 35 characters! Try again with a shorter message.",plr.Name)) end
+		end
 		if string.sub(msg,1,14) == "/randomnumber " then
 			sayreq("Random Number by @%s > %s",plr.Name,math.random(-100,100))
 		end
@@ -55,4 +58,4 @@ end)localplr.Idled:Connect(function()
 end)
 
 sayreq(string.format("i say hello to the %s people in this server!! :))",#plrs:GetPlayers()));wait(2)
-sayreq("say /cmds in chat to understand my commands ( i only have 3 [1 is wip] rn broo )")
+sayreq("say /cmds in chat to understand my commands ( i only have 2 rn broo )")
