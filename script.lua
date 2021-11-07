@@ -2,7 +2,7 @@
 -- bf greeter bot lol
 -- dont distribute to anybody (PLSS)
 -- only works with synapse
--- 1.0b
+-- 1.0c
 --############################################
 
 if not (syn and syn.request) then --[[not synapse or sw]] error("Your executor is not Synapse or ScriptWare!") end
@@ -22,7 +22,7 @@ local setupplr = function(plr)
 	if not plr:IsA("Player") then return end
 	plr.Chatted:Connect(function(msg)
 		if string.sub(msg,1,5) == "/say " then
-			if #string.sub(msg,6,msg-5)<= 35 then
+			if #string.sub(msg,6,msg-5)<= 35 and not string.sub(msg,1,5) ~= "/say " then
 				sayreq("Say Request by @%s > %s",plr.Name,string.sub(msg,6,#msg-5))
 			else sayreq(string.format("Error > @%s Your message is over 35 characters! Try again with a shorter message.",plr.Name)) end
 		end
