@@ -20,7 +20,7 @@ function pf(part: Vector3)
     local wps = path:GetWaypoints()
     antisit = plrs.LocalPlayer.Character.Humanoid:GetPropertyChangedSignal("Sit"):Connect(function()
         if hrp.Parent.Humanoid.Sit == true then
-            wait()
+            task.wait()
             plrs.LocalPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
         end
     end)
@@ -40,7 +40,7 @@ function pf(part: Vector3)
     for i, wp in next, wps do
         if tpmode then
             hrp.CFrame = CFrame.new(wp.Position + Vector3.new(0,1.6,0))
-            wait()
+            task.wait()
         else
             if wp.Action == Enum.PathWaypointAction.Jump then
                 plrs.LocalPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
