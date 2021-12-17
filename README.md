@@ -1,2 +1,3 @@
-# BFGreeterBot
-used to be a logger but yeahhh
+# my become fmo stuff
+hggggggggggggg
+i store scripts here
