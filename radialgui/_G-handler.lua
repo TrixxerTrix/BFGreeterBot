@@ -71,9 +71,9 @@ function rad.tween(self, new, tt)
 end
 
 function rad.newgui()
-    local gui = game:GetObjects("rbxassetid://8289989889")[1]
+    local gui = game:GetObjects("rbxassetid://8290893906")[1]
 	gui.Parent = game:GetService("CoreGui")
-	return gui
+    return gui
 end
 
 _G.rad = setmetatable({},rad)
