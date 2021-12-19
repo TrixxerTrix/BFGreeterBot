@@ -56,9 +56,8 @@ function pf:pf(part: Vector3)
         end
         plrs.LocalPlayer.Character.Humanoid:MoveTo(wp.Position)
         plrs.LocalPlayer.Character.Humanoid.MoveToFinished:Wait()
-        task.spawn(function()
-            radobj:tween((i/#wps)*100,0.25)
-        end)
+        radobj:set((i/#wps)*100)
+	radobj:update()
     end
     antisit:Disconnect()
     pathfinding_fol:Destroy()
