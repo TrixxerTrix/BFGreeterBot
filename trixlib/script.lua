@@ -80,3 +80,4 @@ end
 
 shared.t_utils = setmetatable(util,{})
 _G.t_utils = shared.t_utils
+return util
