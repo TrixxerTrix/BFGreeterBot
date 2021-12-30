@@ -69,7 +69,7 @@ end
 
 function util.getanim(index: number)
 	local sgui = util.gets("StarterGui")
-	return util[index] or {Play = function()
+	return animationcache[index] or {Play = function()
 			sgui:SetCore("SendNotification",{Text = "Invalid Animation"; Duration = 5; Title = "Error"})
 		end, Stop = function()
 			sgui:SetCore("SendNotification",{Text = "Invalid Animation"; Duration = 5; Title = "Error"})
