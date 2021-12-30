@@ -1,3 +1,3 @@
 -----------------------------------------------------------------------------------------------------------------------------
-loadstring(game:HttpGet("https://raw.githubusercontent.com/TrixxerTrix/become-fumo-stuff/main/trixlib/versions/0.5.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/TrixxerTrix/become-fumo-stuff/main/trixlib/versions/0.6.lua"))()
 -----------------------------------------------------------------------------------------------------------------------------
