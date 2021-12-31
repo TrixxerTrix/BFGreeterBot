@@ -138,5 +138,5 @@ end
 
 --------------------------------------
 
-shared.t_utils = setmetatable(util,{})
+shared.t_utils = table.freeze(util)
 _G.t_utils = shared.t_utils
