@@ -138,5 +138,5 @@ end
 
 --------------------------------------
 
-shared.t_utils = table.freeze(util)
+shared.t_utils = setmetatable(util,{__newindex = function() warn("> Trix's Utils is locked") end})
 _G.t_utils = shared.t_utils
