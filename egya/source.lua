@@ -93,14 +93,14 @@ for i, v in next, plrs:GetPlayers() do
 end
 
 coroutine.resume(coroutine.create(function()
-	while true do
+	while canbeused do
 		saymsgevent:FireServer("uhh to actually use me say \"!ask <message> \"","All")
-		task.wait(60)
+		task.wait(120)
 	end
 end))
 
 coroutine.resume(coroutine.create(function()
-	while true do
+	while canbeused do
 		local games,servers = http:JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/6238705697/servers/Public?sortOrder=Asc&limit=100")),{}
 		for i, v in next, games.data do
 			if typeof(v) == "table" and v.maxPlayers > v.playing and v.id ~= game.JobId then
