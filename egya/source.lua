@@ -77,7 +77,7 @@ local setup = function(plr)
 			table.insert(delay,plr.UserId)
 			task.spawn(function()
 				task.delay(10,function()
-					table.remove(delay,table.find(plr.UserId))
+					table.remove(delay,table.find(delay,plr.UserId))
 				end)
 			end)
 			return		
@@ -103,15 +103,10 @@ coroutine.resume(coroutine.create(function()
 	while canbeused do
 		local games,servers = http:JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/6238705697/servers/Public?sortOrder=Asc&limit=100")),{}
 		for i, v in next, games.data do
-			if typeof(v) == "table" and v.maxPlayers > v.playing and v.id ~= game.JobId then
+			if typeof(v) == "table" and #plrs:GetPlayers() > v.playing and v.id ~= game.JobId then
 				servers[#servers + 1] = v.id
 			end
 		end if #servers > 0 then
-			local priorities,highest,pick = {},0,{}
-				for e,r in next, servers do
-					priorities[r.playing],highest = r,math.max(highest,r.playing)
-				end
-			pick = priorities[highest]
 			if pick then
 				canbeused = false
 				saymsgevent:FireServer("There is a server bigger than this one!")
