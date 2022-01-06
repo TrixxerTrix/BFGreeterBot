@@ -24,10 +24,10 @@ settings.chances = {
 
 -- == Main == --
 local plrs,rs = game:GetService("Players"),game:GetService("ReplicatedStorage")
-local http = game:GetService("HttpService")
+local http,tps = game:GetService("HttpService"),game:GetService("TeleportService") --/ "tps" is only used for rebranding to another server; see line 102
 local saymsgevent = rs:WaitForChild("DefaultChatSystemChatEvents"):WaitForChild("SayMessageRequest")
 
-local delay = {}
+local delay,canbeused = {},true
 
 local getitem = function()
 	local sum = 0 
@@ -47,7 +47,7 @@ local setup = function(plr)
 	plr.Chatted:Connect(function(msg)
 		local splitted,tosplit = msg:split(" "),"" 
 		local blacklist = http:JSONDecode(readfile("ellyasks/blacklist.json"))
-		if table.find(blacklist,plr.UserId) or table.find(delay,plr.UserId) then return end
+		if table.find(blacklist,plr.UserId) or table.find(delay,plr.UserId) or not canbeused then return end
 		if splitted[1] == settings.prefix then
 			do for i = 1, #splitted do
 					if i ~= 1 then
@@ -92,7 +92,35 @@ for i, v in next, plrs:GetPlayers() do
 	end
 end
 
-while true do
-	saymsgevent:FireServer("uhh to actually use me say \"!ask <message> \"","All")
-	task.wait(60)
-end
+coroutine.resume(coroutine.create(function()
+	while true do
+		saymsgevent:FireServer("uhh to actually use me say \"!ask <message> \"","All")
+		task.wait(60)
+	end
+end))
+
+coroutine.resume(coroutine.create(function()
+	while true do
+		local games,servers = http:JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/6238705697/servers/Public?sortOrder=Asc&limit=100")),{}
+		for i, v in next, games.data do
+			if typeof(v) == "table" and v.maxPlayers > v.playing and v.id ~= game.JobId then
+				servers[#servers + 1] = v.id
+			end
+		end if #servers > 0 then
+			local priorities,highest,pick = {},0,{}
+				for e,r in next, servers do
+					priorities[r.playing],highest = r,math.max(highest,r.playing)
+				end
+			pick = priorities[highest]
+			if pick then
+				canbeused = false
+				saymsgevent:FireServer("There is a server bigger than this one!")
+				task.wait(5)
+				saymsgevent:FireServer("I have to go there now, see you there!")
+				task.wait(3)
+				tps:TeleportToPlaceInstance(6238705697,servers[Random.new():NextInteger(1, #servers)])
+			else warn("> Could not find a server to serverhop to, trying again in 4 minutes.") end
+		else warn("> Could not find a server to serverhop to, trying again in 4 minutes.") end
+		task.wait(240)
+	end
+end))
