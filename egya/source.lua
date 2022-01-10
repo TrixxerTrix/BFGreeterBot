@@ -74,12 +74,6 @@ local setup = function(plr)
 				local defect = http:JSONEncode(instances)
 				writefile(settings.directory,defect)
 			end
-			table.insert(delay,plr.UserId)
-			task.spawn(function()
-				task.delay(10,function()
-					table.remove(delay,table.find(delay,plr.UserId))
-				end)
-			end)
 			return		
 		end
 	end)
