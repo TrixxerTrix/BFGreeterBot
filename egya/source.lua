@@ -63,14 +63,14 @@ local setup = function(plr)
 			if instances[msg] then
 				local dir = instances[msg]
 				if plr.DisplayName:len() > 9 and not names[plr.UserId] then
-					saymsgevent:FireServer(string.format("%s•, %s. (%s%%) (10 second cooldown)",names[plr.UserId] or plr.DisplayName:sub(1,10),dir[1],dir[2]),"All")
-				else saymsgevent:FireServer(string.format("%s, %s. (%s%%) (10 second cooldown)",names[plr.UserId] or plr.DisplayName,dir[1],dir[2]),"All") end
+					saymsgevent:FireServer(string.format("%s•, %s. (%s%%)",names[plr.UserId] or plr.DisplayName:sub(1,10),dir[1],dir[2]),"All")
+				else saymsgevent:FireServer(string.format("%s, %s. (%s%%)",names[plr.UserId] or plr.DisplayName,dir[1],dir[2]),"All") end
 			else
 				local dir = getitem()
 				instances[msg] = {dir[1],dir[2]}
 				if plr.DisplayName:len() > 9 and not names[plr.UserId] then
-					saymsgevent:FireServer(string.format("%s•, %s. (%s%%) (10 second cooldown)",names[plr.UserId] or plr.DisplayName:sub(1,10),dir[1],dir[2]),"All")
-				else saymsgevent:FireServer(string.format("%s, %s. (%s%%) (10 second cooldown)",names[plr.UserId] or plr.DisplayName,dir[1],dir[2]),"All") end
+					saymsgevent:FireServer(string.format("%s•, %s. (%s%%)",names[plr.UserId] or plr.DisplayName:sub(1,10),dir[1],dir[2]),"All")
+				else saymsgevent:FireServer(string.format("%s, %s. (%s%%)",names[plr.UserId] or plr.DisplayName,dir[1],dir[2]),"All") end
 				local defect = http:JSONEncode(instances)
 				writefile(settings.directory,defect)
 			end
