@@ -103,7 +103,7 @@ coroutine.resume(coroutine.create(function()
 	while canbeused do
 		local games,servers = http:JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/6238705697/servers/Public?sortOrder=Asc&limit=100")),{}
 		for i, v in next, games.data do
-			if typeof(v) == "table" and #plrs:GetPlayers() > v.playing and v.id ~= game.JobId then
+			if typeof(v) == "table" and #plrs:GetPlayers() < v.playing and v.id ~= game.JobId then
 				servers[#servers + 1] = v.id
 			end
 		end if #servers > 0 then
